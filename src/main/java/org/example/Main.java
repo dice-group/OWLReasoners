@@ -17,16 +17,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import org.semanticweb.owlapi.model.OWLClass;
-import org.semanticweb.owlapi.model.OWLClassExpression;
-import org.semanticweb.owlapi.model.OWLEntity;
-import org.semanticweb.owlapi.model.OWLNamedIndividual;
-import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.model.OWLOntologyManager;
-import org.semanticweb.owlapi.reasoner.Node;
-import org.semanticweb.owlapi.reasoner.NodeSet;
-import org.semanticweb.owlapi.reasoner.OWLReasoner;
+
 import org.semanticweb.owlapi.util.mansyntax.ManchesterOWLSyntaxParser;
+
 
 import static org.semanticweb.owlapi.util.OWLAPIStreamUtils.asList;
 import static org.semanticweb.owlapi.util.OWLAPIStreamUtils.asUnorderedSet;
@@ -36,14 +29,21 @@ public class Main {
     /**
      * @param args args
      */
-    private static final File file = new File("/home/demir/Desktop/Softwares/NRW/KGs/Family/family-benchmark_rich_background.owl");
 
     public static void main(String[] args) {
+
+        // read file path from command line
+        String filePath = args[0]; 
+        File file = new File(filePath);
+
+
+
         //https://github.com/perwendel/spark
         port(8080);
         OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
         //TODO: File should be given as an argument.
         OWLOntology ontology = null;
+        // ontology = manager.loadOntologyFromOntologyDocument(file);
         try {
             ontology = manager.loadOntologyFromOntologyDocument(file);
         } catch (OWLOntologyCreationException e) {
